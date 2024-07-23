@@ -68,7 +68,7 @@ There is a difference in alcohol consumption based in where people sit
 plot(TukeyHSD(model1))
 ```
 The boxplot shows the difference in mean levels of the seats.
-               
+    
 ## Conclusions
 
 I conclude that students who sit in the back are more likely to drink alcohol than the students who sit in the front. The females have a lower mean than the males.
