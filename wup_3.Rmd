@@ -24,28 +24,52 @@ $H_0$: There is no difference between the average number of drinks imbibed betwe
 
 $H_A$: The average number drinks is different between at least two rows.   
 
-## Now with ggplot - first select the basic data
+# Methods 
+In the data set davisdata Seat is a categorical variable, alcohol is numerical
+
+We try to predict alcohol ~ Seat so we use the numerical ~ categorical helper file. 
+
+# Results
+
+## Descriptive Results
+
+### Graphical Summary
 
 ```{r}
 basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
 ```
-## Now add in boxplot
+Now add in boxplot
 
 ```{r}
 basicCN + geom_boxplot()
 ```
-  
-  
-### get fancy  
+
+This boxplot shows that the students who sat in the back row were more likely to drink alcohol than the students who sit closer to the front. 
+
+### Numerical Summary
 
 ```{r}
-basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
+favstats(momheight~Sex,data=ucdavis1)
 ```
 
-## Numerical Summarys 
+The numerical summary shows that Females have a lower mean than the males.
 
-## Inferential Tests
+### Inferential Results
+
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+
+The p-value is 0.000116, less than 0.05 so we reject null hypothesis
+There is a difference in alcohol consumption based in where people sit
+
+```{r}
+plot(TukeyHSD(model1))
+```
+The boxplot shows the difference in mean levels of the seats.
 
 ## Conclusions
 
+I conclude that students who sit in the back are more likely to drink alcohol than the students who sit in the front. The females have a lower mean than the males.
 
